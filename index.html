@@ -3,75 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nict11</title>
+    <title>nict11 • неизвестность</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: #0d0d0d;
+            background: #0a0a0f;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Courier New', monospace;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Анимированные звёзды */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate ease-in-out;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
         .card {
-            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            position: relative;
+            z-index: 1;
+            background: rgba(10, 10, 20, 0.85);
+            backdrop-filter: blur(6px);
             padding: 50px 40px;
-            border-radius: 40px;
-            max-width: 480px;
+            border-radius: 30px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border: 1px solid rgba(100, 200, 255, 0.15);
+            box-shadow: 0 0 60px rgba(0, 100, 255, 0.1);
         }
-        .username {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        .handle {
-            font-size: 1.1rem;
-            color: #9aa0b0;
-            margin-bottom: 30px;
+
+        .symbol {
+            font-size: 70px;
+            color: #aaccff;
+            text-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
+            margin-bottom: 10px;
             display: block;
-            border-bottom: 1px solid #2a2a2a;
-            padding-bottom: 20px;
         }
-        .bio {
-            color: #c8ced8;
+
+        .username {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #e0e8ff;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(100, 200, 255, 0.2);
+            margin-bottom: 6px;
+        }
+
+        .handle {
             font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 32px;
+            color: #7a8ba8;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
+            padding-bottom: 18px;
+            display: block;
         }
+
+        .bio {
+            color: #b0c4de;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 24px 0 28px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .time-display {
+            font-size: 0.9rem;
+            color: #6a7f9f;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+            border-top: 1px solid rgba(100, 200, 255, 0.08);
+            padding-top: 18px;
+            font-family: 'Courier New', monospace;
+        }
+
         .mastodon-link {
             display: inline-block;
-            background: #6364ff;
-            color: #fff;
-            padding: 14px 34px;
+            background: transparent;
+            color: #88bbff;
+            padding: 12px 34px;
             border-radius: 60px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 24px rgba(99,100,255,0.25);
+            font-size: 1rem;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
+
         .mastodon-link:hover {
-            background: #7a7bff;
+            background: rgba(100, 200, 255, 0.08);
+            box-shadow: 0 0 30px rgba(100, 200, 255, 0.15);
+            border-color: rgba(100, 200, 255, 0.6);
+            transform: scale(1.02);
         }
+
         .footer {
             margin-top: 30px;
-            font-size: 0.8rem;
-            color: #3a3f4a;
+            font-size: 0.7rem;
+            color: #2f3f55;
+            letter-spacing: 3px;
+        }
+
+        /* Адаптив */
+        @media (max-width: 480px) {
+            .card { padding: 30px 20px; }
+            .username { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Звёзды (генерируются JS) -->
+    <div class="stars" id="stars"></div>
+
     <div class="card">
+        <span class="symbol">✦</span>
         <div class="username">nict11</div>
-        <span class="handle">@nict11</span>
-        <div class="bio">✦ просто человек ✦<br>иногда пишу код, иногда отдыхаю</div>
-        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">🐘 Мой Mastodon</a>
-        <div class="footer">верификация • 2026</div>
+        <span class="handle">@unknown</span>
+
+        <div class="bio">
+            «тишина за экраном<br>
+            и свет в конце провода»
+        </div>
+
+        <!-- Время (обновляется каждую секунду) -->
+        <div class="time-display" id="timeDisplay">—:—:—</div>
+
+        <!-- Ссылка для верификации (обязательно с rel="me") -->
+        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">
+            ⋆ связь ⋆
+        </a>
+
+        <div class="footer">♢ 2026 • невидимка</div>
     </div>
+
+    <script>
+        // Генерация звёзд
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            star.style.animationDuration = (Math.random() * 4 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Обновление времени
+        function updateTime() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('timeDisplay').textContent = h + ':' + m + ':' + s + ' GMT+3';
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 </body>
 </html>
