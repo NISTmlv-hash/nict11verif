@@ -15,11 +15,9 @@
             min-height: 100vh;
             font-family: 'Courier New', monospace;
             padding: 20px;
-            position: relative;
             overflow: hidden;
         }
 
-        /* Анимированные звёзды */
         .stars {
             position: fixed;
             top: 0;
@@ -80,20 +78,11 @@
             display: block;
         }
 
-        .bio {
-            color: #b0c4de;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin: 24px 0 28px;
-            font-style: italic;
-            opacity: 0.8;
-        }
-
         .time-display {
             font-size: 0.9rem;
             color: #6a7f9f;
             letter-spacing: 2px;
-            margin-bottom: 28px;
+            margin: 28px 0 28px;
             border-top: 1px solid rgba(100, 200, 255, 0.08);
             padding-top: 18px;
             font-family: 'Courier New', monospace;
@@ -127,7 +116,6 @@
             letter-spacing: 3px;
         }
 
-        /* Адаптив */
         @media (max-width: 480px) {
             .card { padding: 30px 20px; }
             .username { font-size: 2rem; }
@@ -135,7 +123,6 @@
     </style>
 </head>
 <body>
-    <!-- Звёзды (генерируются JS) -->
     <div class="stars" id="stars"></div>
 
     <div class="card">
@@ -143,15 +130,10 @@
         <div class="username">nict11</div>
         <span class="handle">@unknown</span>
 
-        <div class="bio">
-            «тишина за экраном<br>
-            и свет в конце провода»
-        </div>
-
-        <!-- Время (обновляется каждую секунду) -->
+        <!-- Время -->
         <div class="time-display" id="timeDisplay">—:—:—</div>
 
-        <!-- Ссылка для верификации (обязательно с rel="me") -->
+        <!-- Ссылка для верификации -->
         <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">
             ⋆ связь ⋆
         </a>
@@ -160,7 +142,7 @@
     </div>
 
     <script>
-        // Генерация звёзд
+        // Звёзды
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 80; i++) {
             const star = document.createElement('div');
@@ -175,7 +157,7 @@
             starsContainer.appendChild(star);
         }
 
-        // Обновление времени
+        // Время
         function updateTime() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
