@@ -5,23 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>nict11</title>
     <style>
-        /* Глобальные стили */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #0d0d0d;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             padding: 20px;
         }
-
         .card {
             background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
             padding: 50px 40px;
@@ -29,29 +22,14 @@
             max-width: 480px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03);
-            transition: transform 0.2s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
-
-        .card:hover {
-            transform: scale(1.01);
-        }
-
-        .avatar {
-            font-size: 80px;
-            margin-bottom: 10px;
-            display: block;
-            filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.3));
-        }
-
         .username {
             font-size: 2.8rem;
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: -0.5px;
             margin-bottom: 8px;
         }
-
         .handle {
             font-size: 1.1rem;
             color: #9aa0b0;
@@ -60,15 +38,12 @@
             border-bottom: 1px solid #2a2a2a;
             padding-bottom: 20px;
         }
-
         .bio {
             color: #c8ced8;
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 32px;
-            opacity: 0.8;
         }
-
         .mastodon-link {
             display: inline-block;
             background: #6364ff;
@@ -78,53 +53,25 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 24px rgba(99, 100, 255, 0.25);
+            box-shadow: 0 8px 24px rgba(99,100,255,0.25);
         }
-
         .mastodon-link:hover {
             background: #7a7bff;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(99, 100, 255, 0.4);
         }
-
-        .mastodon-link i {
-            margin-right: 8px;
-        }
-
         .footer {
             margin-top: 30px;
             font-size: 0.8rem;
             color: #3a3f4a;
-            letter-spacing: 0.5px;
-        }
-
-        /* Небольшая адаптация для мобильных */
-        @media (max-width: 480px) {
-            .card { padding: 30px 20px; }
-            .username { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <span class="avatar">🧊</span>
         <div class="username">nict11</div>
         <span class="handle">@nict11</span>
-
-        <div class="bio">
-            ✦ просто человек ✦<br>
-            иногда пишу код, иногда отдыхаю
-        </div>
-
-        <!-- ЭТО ГЛАВНАЯ ССЫЛКА ДЛЯ ВЕРИФИКАЦИИ -->
-        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">
-            🐘 Мой Mastodon
-        </a>
-
-        <div class="footer">
-            верификация • 2026
-        </div>
+        <div class="bio">✦ просто человек ✦<br>иногда пишу код, иногда отдыхаю</div>
+        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">🐘 Мой Mastodon</a>
+        <div class="footer">верификация • 2026</div>
     </div>
 </body>
 </html>
