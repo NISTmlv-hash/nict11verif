@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nict11 • неизвестность</title>
+    <title>nict11</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             background: #0a0a0f;
             display: flex;
@@ -17,7 +16,6 @@
             padding: 20px;
             overflow: hidden;
         }
-
         .stars {
             position: fixed;
             top: 0;
@@ -37,7 +35,6 @@
             0% { opacity: 0.1; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1.2); }
         }
-
         .card {
             position: relative;
             z-index: 1;
@@ -51,7 +48,6 @@
             border: 1px solid rgba(100, 200, 255, 0.15);
             box-shadow: 0 0 60px rgba(0, 100, 255, 0.1);
         }
-
         .symbol {
             font-size: 70px;
             color: #aaccff;
@@ -59,7 +55,6 @@
             margin-bottom: 10px;
             display: block;
         }
-
         .username {
             font-size: 2.6rem;
             font-weight: 700;
@@ -68,16 +63,6 @@
             text-shadow: 0 0 20px rgba(100, 200, 255, 0.2);
             margin-bottom: 6px;
         }
-
-        .handle {
-            font-size: 1rem;
-            color: #7a8ba8;
-            letter-spacing: 2px;
-            border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-            padding-bottom: 18px;
-            display: block;
-        }
-
         .time-display {
             font-size: 0.9rem;
             color: #6a7f9f;
@@ -87,7 +72,6 @@
             padding-top: 18px;
             font-family: 'Courier New', monospace;
         }
-
         .mastodon-link {
             display: inline-block;
             background: transparent;
@@ -101,21 +85,12 @@
             transition: all 0.3s ease;
             letter-spacing: 1px;
         }
-
         .mastodon-link:hover {
             background: rgba(100, 200, 255, 0.08);
             box-shadow: 0 0 30px rgba(100, 200, 255, 0.15);
             border-color: rgba(100, 200, 255, 0.6);
             transform: scale(1.02);
         }
-
-        .footer {
-            margin-top: 30px;
-            font-size: 0.7rem;
-            color: #2f3f55;
-            letter-spacing: 3px;
-        }
-
         @media (max-width: 480px) {
             .card { padding: 30px 20px; }
             .username { font-size: 2rem; }
@@ -128,17 +103,8 @@
     <div class="card">
         <span class="symbol">✦</span>
         <div class="username">nict11</div>
-        <span class="handle">@unknown</span>
-
-        <!-- Время -->
         <div class="time-display" id="timeDisplay">—:—:—</div>
-
-        <!-- Ссылка для верификации -->
-        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">
-            ⋆ связь ⋆
-        </a>
-
-        <div class="footer">♢ 2026 • невидимка</div>
+        <a href="https://mastodon.social/@nict11" rel="me" class="mastodon-link">⋆ связь ⋆</a>
     </div>
 
     <script>
@@ -156,7 +122,6 @@
             star.style.animationDuration = (Math.random() * 4 + 2) + 's';
             starsContainer.appendChild(star);
         }
-
         // Время
         function updateTime() {
             const now = new Date();
