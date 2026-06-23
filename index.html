@@ -3,728 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NovaPay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Fragмент • чёрный рынок</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 16px 12px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .app {
-            max-width: 400px;
-            width: 100%;
-            background-color: #121212;
-            border-radius: 32px;
-            padding: 24px 20px 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            position: relative;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-        }
-
-        .header-title {
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: -0.5px;
-            color: #f5f5f5;
-        }
-        .header-title span {
-            color: #2b6ff2;
-        }
-
-        .header-avatar {
-            width: 36px;
-            height: 36px;
-            background-color: #2b6ff2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .header-avatar:active {
-            background-color: #1f5ad8;
-        }
-
-        /* Balance */
-        .balance-section {
-            margin-bottom: 28px;
-        }
-
-        .balance-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #8a8a8a;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .balance-main {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .balance-amount {
-            font-size: 38px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #ffffff;
-            line-height: 1.1;
-        }
-
-        .balance-currency {
-            font-size: 20px;
-            font-weight: 500;
-            color: #8a8a8a;
-        }
-
-        .balance-usd {
-            font-size: 16px;
-            font-weight: 400;
-            color: #6a6a6a;
-            margin-top: 4px;
-        }
-
-        /* Action buttons */
-        .actions {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 14px 0;
-            border: none;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
-            text-align: center;
-            letter-spacing: 0.2px;
-        }
-
-        .btn:active {
-            transform: scale(0.96);
-        }
-
-        .btn-primary {
-            background-color: #2b6ff2;
-            color: #ffffff;
-        }
-        .btn-primary:hover {
-            background-color: #3a7cf5;
-        }
-        .btn-primary:active {
-            background-color: #1f5ad8;
-        }
-
-        .btn-secondary {
-            background-color: #1e1e1e;
-            border: 1px solid #2e2e2e;
-            color: #f0f0f0;
-        }
-        .btn-secondary:hover {
-            background-color: #2a2a2a;
-        }
-        .btn-secondary:active {
-            background-color: #3a3a3a;
-        }
-
-        /* Address */
-        .address-section {
-            background-color: #1a1a1a;
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #282828;
-        }
-
-        .address-label {
-            font-size: 12px;
-            font-weight: 500;
-            color: #6a6a6a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-right: 12px;
-        }
-
-        .address-value {
-            font-family: 'Inter', monospace;
-            font-size: 14px;
-            font-weight: 400;
-            color: #d0d0d0;
-            letter-spacing: 0.2px;
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .address-copy {
-            color: #6a6a6a;
-            font-size: 18px;
-            font-weight: 300;
-            cursor: pointer;
-            padding-left: 12px;
-            border-left: 1px solid #2e2e2e;
-            transition: color 0.15s;
-            user-select: none;
-        }
-        .address-copy:hover {
-            color: #b0b0b0;
-        }
-        .address-copy:active {
-            color: #ffffff;
-        }
-
-        /* Transactions */
-        .transactions-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .transactions-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #f0f0f0;
-        }
-
-        .transactions-see-all {
-            font-size: 14px;
-            font-weight: 500;
-            color: #6a6a6a;
-            cursor: pointer;
-            transition: color 0.15s;
-        }
-        .transactions-see-all:hover {
-            color: #b0b0b0;
-        }
-        .transactions-see-all:active {
-            color: #ffffff;
-        }
-
-        .transaction-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-height: 160px;
-        }
-
-        .transaction-item {
-            display: flex;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid #1c1c1c;
-        }
-
-        .transaction-item:last-child {
-            border-bottom: none;
-        }
-
-        .tx-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 300;
-            margin-right: 14px;
-            flex-shrink: 0;
-        }
-
-        .tx-icon.in {
-            background-color: rgba(0, 200, 100, 0.12);
-            color: #00c864;
-        }
-
-        .tx-icon.out {
-            background-color: rgba(255, 80, 80, 0.12);
-            color: #ff5a5a;
-        }
-
-        .tx-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .tx-title {
-            font-size: 15px;
-            font-weight: 500;
-            color: #f0f0f0;
-            margin-bottom: 2px;
-        }
-
-        .tx-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-            color: #6a6a6a;
-        }
-
-        .tx-meta .status {
-            color: #00c864;
-            font-weight: 500;
-        }
-
-        .tx-meta .status.pending {
-            color: #f0a030;
-        }
-
-        .tx-amount {
-            font-weight: 600;
-            font-size: 15px;
-            text-align: right;
-            flex-shrink: 0;
-            margin-left: 12px;
-        }
-
-        .tx-amount.positive {
-            color: #00c864;
-        }
-
-        .tx-amount.negative {
-            color: #ff5a5a;
-        }
-
-        /* Empty state */
-        .empty-transactions {
-            color: #4a4a4a;
-            text-align: center;
-            font-size: 14px;
-            padding: 20px 0;
-            letter-spacing: 0.3px;
-        }
-
-        /* Bottom nav */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid #1c1c1c;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 12px;
-            font-weight: 500;
-            color: #5a5a5a;
-            cursor: pointer;
-            gap: 4px;
-            transition: color 0.15s;
-            padding: 4px 12px;
-            border-radius: 8px;
-            background: transparent;
-            border: none;
-            font-family: inherit;
-        }
-        .nav-item:hover {
-            color: #8a8a8a;
-        }
-        .nav-item:active {
-            color: #ffffff;
-        }
-
-        .nav-item.active {
-            color: #2b6ff2;
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            line-height: 1;
-            font-weight: 300;
-        }
-
-        .nav-label {
-            font-size: 10px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        /* Dev menu overlay */
-        .dev-overlay {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .dev-overlay.open {
-            display: flex;
-        }
-
-        .dev-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #f0f0f0;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-
-        .dev-input {
-            width: 100%;
-            padding: 14px 16px;
-            border-radius: 14px;
-            border: 1px solid #2e2e2e;
-            background: #1a1a1a;
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border 0.15s;
-        }
-        .dev-input:focus {
-            border-color: #2b6ff2;
-        }
-        .dev-input::placeholder {
-            color: #5a5a5a;
-            font-weight: 400;
-            font-size: 16px;
-        }
-
-        .dev-actions {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .dev-btn {
-            flex: 1;
-            padding: 14px 0;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
-            font-family: 'Inter', sans-serif;
-        }
-        .dev-btn:active {
-            transform: scale(0.96);
-        }
-
-        .dev-btn-primary {
-            background-color: #2b6ff2;
-            color: #ffffff;
-        }
-        .dev-btn-primary:hover {
-            background-color: #3a7cf5;
-        }
-        .dev-btn-primary:active {
-            background-color: #1f5ad8;
-        }
-
-        .dev-btn-secondary {
-            background-color: #2a2a2a;
-            color: #b0b0b0;
-        }
-        .dev-btn-secondary:hover {
-            background-color: #3a3a3a;
-        }
-        .dev-btn-secondary:active {
-            background-color: #4a4a4a;
-        }
-
-        .dev-hint {
-            font-size: 12px;
-            color: #5a5a5a;
-            text-align: center;
-            margin-top: 4px;
-        }
-
-        /* Responsive */
-        @media (max-width: 440px) {
-            .app {
-                padding: 20px 16px 12px;
-                border-radius: 24px;
-            }
-            .balance-amount {
-                font-size: 32px;
-            }
-            .balance-currency {
-                font-size: 18px;
-            }
-            .dev-overlay {
-                border-radius: 24px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background: #0b0b0e; color: #e4e4ea; padding: 16px 16px 80px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        .app { max-width: 440px; width: 100%; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 20px; border-bottom: 1px solid #1f1f2a; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .user { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .avatar { width: 44px; height: 44px; border-radius: 50%; background: #2a2a3a; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #a97aff; border: 1px solid #3a3a4e; overflow: hidden; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .username { font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 6px; }
+        .verified-badge { color: #1d9bf0; font-size: 18px; }
+        .balance-wrap { background: #1a1a26; padding: 6px 14px; border-radius: 40px; font-size: 14px; font-weight: 600; color: #f5c542; border: 1px solid #2f2f42; display: flex; align-items: center; gap: 6px; }
+        .balance-wrap span { color: #fff; font-weight: 500; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; background: #14141c; padding: 4px; border-radius: 60px; border: 1px solid #20202e; overflow-x: auto; }
+        .tab { flex: 1; padding: 10px 0; text-align: center; border-radius: 40px; font-weight: 600; font-size: 14px; color: #7a7a92; cursor: pointer; transition: all 0.2s; background: transparent; border: none; white-space: nowrap; }
+        .tab.active { background: #2b2b40; color: #fff; box-shadow: 0 0 12px rgba(100, 80, 255, 0.2); }
+        .page { display: none; flex-direction: column; gap: 16px; }
+        .page.active { display: flex; }
+        .market-grid, .inventory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .market-item, .inv-item { background: #13131c; border: 1px solid #26263a; border-radius: 20px; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+        .market-item img, .inv-item img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; background: #1e1e2c; }
+        .market-item .price { font-weight: 700; color: #f5c542; font-size: 15px; display: flex; align-items: center; gap: 4px; }
+        .market-item .title, .inv-item .title { font-size: 13px; font-weight: 500; color: #bcbcd4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .market-item .seller { font-size: 11px; color: #6a6a8a; margin-top: 2px; }
+        .market-item .buy-btn, .inv-item .action-btn { background: #2b2b42; border: none; color: #fff; padding: 6px 0; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.15s; width: 100%; }
+        .market-item .buy-btn:hover, .inv-item .action-btn:hover { background: #3e3e5e; }
+        .market-item .delete-btn, .inv-item .delete-btn { position: absolute; top: 8px; right: 8px; background: rgba(255, 60, 60, 0.15); border: none; color: #ff6b6b; font-size: 16px; width: 28px; height: 28px; border-radius: 40px; cursor: pointer; backdrop-filter: blur(4px); }
+        .add-btn, .profile-save-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: #1e1e30; border: 2px dashed #3a3a58; border-radius: 40px; padding: 14px; color: #8a8aaa; font-weight: 600; font-size: 16px; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 6px; }
+        .add-btn:hover, .profile-save-btn:hover { border-color: #6a6a9a; background: #24243a; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: #14141f; border: 1px solid #2f2f48; border-radius: 32px; padding: 28px 24px; max-width: 400px; width: 100%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
+        .modal h3 { font-size: 20px; margin-bottom: 16px; color: #fff; font-weight: 600; }
+        .modal input, .modal button, .modal .file-input { width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid #2f2f4a; background: #0d0d16; color: #fff; font-size: 15px; margin-bottom: 12px; outline: none; }
+        .modal input:focus { border-color: #6a5acd; }
+        .modal .actions { display: flex; gap: 10px; margin-top: 6px; }
+        .modal .actions button { flex: 1; padding: 12px; border-radius: 40px; font-weight: 600; border: none; cursor: pointer; font-size: 15px; transition: 0.15s; }
+        .modal .actions .cancel { background: #222237; color: #9a9aba; }
+        .modal .actions .confirm { background: #6a5acd; color: #fff; }
+        .modal .actions .confirm:hover { background: #7b6bdf; }
+        .empty-state { color: #5a5a7a; text-align: center; padding: 40px 0; font-size: 14px; grid-column: 1/-1; }
+        .coin-icon { display: inline-block; width: 18px; height: 18px; background: radial-gradient(circle at 30% 30%, #f5c542, #d49b2a); border-radius: 50%; box-shadow: 0 0 8px rgba(245, 197, 66, 0.4); margin-right: 4px; }
+        .text-muted { color: #6a6a8a; font-size: 13px; }
+        .red-rare { border: 3px solid #ff2a2a; box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+        .inv-item .action-btn.roulette { background: #8a2a2a; }
+        .inv-item .action-btn.roulette:hover { background: #aa3a3a; }
+        .inv-item .action-btn.sell { background: #2a6a3a; }
+        .inv-item .action-btn.sell:hover { background: #3a8a4a; }
+        .profile-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+        .profile-field label { font-size: 14px; color: #9a9aba; }
+        .profile-field input[type="text"], .profile-field input[type="file"] { background: #0d0d16; border: 1px solid #2f2f4a; border-radius: 16px; padding: 12px 16px; color: #fff; font-size: 15px; }
+        .profile-field .checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; color: #bcbcd4; }
+        .profile-field .checkbox-label input { width: 20px; height: 20px; accent-color: #6a5acd; }
+        @media (max-width: 480px) { .market-grid, .inventory-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .header { flex-wrap: wrap; } .balance-wrap { font-size: 13px; padding: 4px 12px; } }
     </style>
 </head>
 <body>
-    <div class="app no-select" id="app">
-
-        <!-- Header -->
-        <div class="header">
-            <span class="header-title">Nova<span>Pay</span></span>
-            <div class="header-avatar" onclick="alert('Профиль NovaPay')">N</div>
+<div class="app">
+    <div class="header">
+        <div class="user" id="profileTrigger">
+            <div class="avatar" id="avatarDisplay">N</div>
+            <span class="username" id="usernameDisplay">nict11 <span class="verified-badge" id="verifiedBadge" style="display:none;">✓</span></span>
         </div>
-
-        <!-- Balance -->
-        <div class="balance-section">
-            <div class="balance-label">Total Balance</div>
-            <div class="balance-main">
-                <span class="balance-amount" id="balanceAmount">0.00000000</span>
-                <span class="balance-currency">BTC</span>
-            </div>
-            <div class="balance-usd" id="balanceUsd">≈ 0.00 USD</div>
-        </div>
-
-        <!-- Actions -->
-        <div class="actions">
-            <div class="btn btn-primary" onclick="alert('Форма отправки (демо)')">Send</div>
-            <div class="btn btn-secondary" onclick="alert('Показать адрес для получения (демо)')">Receive</div>
-        </div>
-
-        <!-- Address -->
-        <div class="address-section">
-            <span class="address-label">Address</span>
-            <span class="address-value">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</span>
-            <span class="address-copy" onclick="alert('Адрес скопирован (демо)')">⏍</span>
-        </div>
-
-        <!-- Transactions -->
-        <div class="transactions-header">
-            <span class="transactions-title">Recent Transactions</span>
-            <span class="transactions-see-all" onclick="alert('Полная история (демо)')">See all</span>
-        </div>
-
-        <div class="transaction-list" id="transactionList">
-            <div class="empty-transactions">No transactions yet</div>
-        </div>
-
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <button class="nav-item active" onclick="alert('Главная')">
-                <span class="nav-icon">⌂</span>
-                <span class="nav-label">Home</span>
-            </button>
-            <button class="nav-item" onclick="alert('История транзакций')">
-                <span class="nav-icon">≡</span>
-                <span class="nav-label">History</span>
-            </button>
-            <button class="nav-item" id="settingsBtn">
-                <span class="nav-icon">⚙</span>
-                <span class="nav-label">Settings</span>
-            </button>
-        </div>
-
-        <!-- Developer Menu Overlay -->
-        <div class="dev-overlay" id="devOverlay">
-            <div class="dev-title">Developer Tools</div>
-            <input type="number" id="devAmount" class="dev-input" placeholder="Enter BTC amount" step="0.00000001" min="0">
-            <div class="dev-actions">
-                <button class="dev-btn dev-btn-primary" id="devAddBtn">Add funds</button>
-                <button class="dev-btn dev-btn-secondary" id="devCloseBtn">Close</button>
-            </div>
-            <div class="dev-hint">(demo: adds to balance & history)</div>
-        </div>
-
+        <div class="balance-wrap"><span class="coin-icon"></span><span id="balanceDisplay">0</span></div>
     </div>
+    <div class="tabs">
+        <button class="tab active" data-tab="market">🏪 Маркет</button>
+        <button class="tab" data-tab="inventory">🎒 Инвентарь</button>
+        <button class="tab" data-tab="roulette">🎰 Рулетка</button>
+        <button class="tab" data-tab="profile">👤 Профиль</button>
+    </div>
+    <!-- Маркет -->
+    <div id="page-market" class="page active">
+        <div class="market-grid" id="marketGrid"></div>
+        <button class="add-btn" id="addItemBtn">➕ Добавить картинку</button>
+    </div>
+    <!-- Инвентарь -->
+    <div id="page-inventory" class="page">
+        <div class="inventory-grid" id="inventoryGrid"></div>
+        <div class="text-muted" style="text-align:center;margin-top:10px;">Твои приобретения</div>
+    </div>
+    <!-- Рулетка -->
+    <div id="page-roulette" class="page">
+        <div style="background:#13131c;border:1px solid #26263a;border-radius:20px;padding:24px;text-align:center;">
+            <h3 style="color:#ff6b6b;">🎰 Ухудшение (рулетка)</h3>
+            <p style="color:#bcbcd4;margin:12px 0;">Стоимость: 1500 монет<br>50% — красная редкость (улучшает качество)<br>50% — потеря картинки</p>
+            <button id="rouletteBtn" style="background:#6a2a2a;border:none;color:#fff;padding:12px 30px;border-radius:40px;font-weight:700;font-size:16px;cursor:pointer;">Запустить рулетку</button>
+            <div id="rouletteResult" style="margin-top:16px;font-size:14px;color:#9a9aba;"></div>
+        </div>
+    </div>
+    <!-- Профиль -->
+    <div id="page-profile" class="page">
+        <div style="background:#13131c;border:1px solid #26263a;border-radius:20px;padding:24px;">
+            <h3 style="color:#fff;margin-bottom:16px;">👤 Настройки профиля</h3>
+            <div class="profile-field">
+                <label>Ваше имя (отображается в продажах)</label>
+                <input type="text" id="profileUsername" value="nict11" placeholder="Ваше имя">
+            </div>
+            <div class="profile-field">
+                <label>Аватарка</label>
+                <input type="file" id="profileAvatarInput" accept="image/*">
+                <div style="display:flex;gap:12px;align-items:center;margin-top:6px;">
+                    <div class="avatar" id="profileAvatarPreview" style="width:60px;height:60px;">N</div>
+                    <button id="removeAvatarBtn" style="background:#2a2a3a;border:none;color:#ff6b6b;padding:6px 12px;border-radius:40px;cursor:pointer;">Удалить</button>
+                </div>
+            </div>
+            <div class="profile-field">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="profileVerified"> Я верифицирован (синяя галочка)
+                </label>
+            </div>
+            <button class="profile-save-btn" id="profileSaveBtn">💾 Сохранить профиль</button>
+        </div>
+    </div>
+</div>
 
-    <script>
-        (function() {
-            // State
-            let balance = 0; // in BTC
-            let transactions = []; // array of objects
-            let clickCount = 0;
-            const BTC_USD_RATE = 68000;
+<!-- Модалка добавления товара -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h3>📸 Новая картинка</h3>
+        <input type="file" id="imageFileInput" accept="image/*" style="padding:10px;background:#0d0d16;border:1px solid #2f2f4a;border-radius:16px;color:#fff;">
+        <input type="text" id="imageTitleInput" placeholder="Название (необязательно)">
+        <input type="number" id="imagePriceInput" placeholder="Цена в монетах" min="1">
+        <div class="actions">
+            <button class="cancel" id="modalCancel">Отмена</button>
+            <button class="confirm" id="modalConfirm">✅ Выставить</button>
+        </div>
+    </div>
+</div>
 
-            // DOM refs
-            const balanceAmount = document.getElementById('balanceAmount');
-            const balanceUsd = document.getElementById('balanceUsd');
-            const transactionList = document.getElementById('transactionList');
-            const settingsBtn = document.getElementById('settingsBtn');
-            const devOverlay = document.getElementById('devOverlay');
-            const devAmount = document.getElementById('devAmount');
-            const devAddBtn = document.getElementById('devAddBtn');
-            const devCloseBtn = document.getElementById('devCloseBtn');
+<!-- Модалка продажи из инвентаря -->
+<div class="modal-overlay" id="sellModalOverlay">
+    <div class="modal">
+        <h3>💰 Продать из инвентаря</h3>
+        <p style="color:#bcbcd4;margin-bottom:16px;">Установи цену в монетах</p>
+        <input type="number" id="sellPriceInput" placeholder="Цена" min="1">
+        <div class="actions">
+            <button class="cancel" id="sellModalCancel">Отмена</button>
+            <button class="confirm" id="sellModalConfirm">✅ Продать</button>
+        </div>
+    </div>
+</div>
 
-            // Render UI
-            function render() {
-                // Balance
-                balanceAmount.textContent = balance.toFixed(8);
-                const usd = balance * BTC_USD_RATE;
-                balanceUsd.textContent = `≈ ${usd.toFixed(2)} USD`;
+<script>
+(function() {
+    console.log('🚀 Запуск');
+    let state = {
+        balance: 500,
+        items: [],
+        inventory: [],
+        nextId: 1,
+        username: 'nict11',
+        avatar: '',
+        verified: false
+    };
 
-                // Transactions
-                if (transactions.length === 0) {
-                    transactionList.innerHTML = `<div class="empty-transactions">No transactions yet</div>`;
-                    return;
-                }
+    // переменная для хранения id картинки, которую продаём
+    let sellingItemId = null;
 
-                let html = '';
-                for (let i = 0; i < transactions.length; i++) {
-                    const tx = transactions[i];
-                    const isIn = tx.type === 'received';
-                    const icon = isIn ? '↓' : '↑';
-                    const iconClass = isIn ? 'in' : 'out';
-                    const amountClass = isIn ? 'positive' : 'negative';
-                    const sign = isIn ? '+' : '-';
-                    const title = isIn ? 'Received' : 'Sent';
-
-                    html += `
-                        <div class="transaction-item">
-                            <div class="tx-icon ${iconClass}">${icon}</div>
-                            <div class="tx-details">
-                                <div class="tx-title">${title}</div>
-                                <div class="tx-meta">
-                                    <span>${tx.date}</span>
-                                    <span class="status">${tx.status}</span>
-                                </div>
-                            </div>
-                            <div class="tx-amount ${amountClass}">${sign} ${tx.amount.toFixed(8)} BTC</div>
-                        </div>
-                    `;
-                }
-                transactionList.innerHTML = html;
+    function loadState() {
+        try {
+            const saved = localStorage.getItem('fragment_game_state');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                state = parsed;
+                if (!state.items) state.items = [];
+                if (!state.inventory) state.inventory = [];
+                if (!state.nextId) state.nextId = 1;
+                if (state.balance === undefined) state.balance = 500;
+                if (!state.username) state.username = 'nict11';
+                if (!state.avatar) state.avatar = '';
+                if (state.verified === undefined) state.verified = false;
+            } else {
+                // демо-товары
+                state.items = [
+                    { id: state.nextId++, url: 'https://picsum.photos/seed/1/300/300', title: 'Артефакт', price: 10, seller: 'nict11' },
+                    { id: state.nextId++, url: 'https://picsum.photos/seed/2/300/300', title: 'Кот', price: 25, seller: 'nict11' },
+                ];
+                state.inventory = [
+                    { id: state.nextId++, url: 'https://picsum.photos/seed/4/300/300', title: 'Мой первый', rare: false },
+                ];
             }
+        } catch(e) { console.error(e); }
+    }
+    function saveState() {
+        try { localStorage.setItem('fragment_game_state', JSON.stringify(state)); } catch(e) {}
+    }
 
-            // Add transaction
-            function addTransaction(amount, type = 'received', status = 'Confirmed') {
-                const now = new Date();
-                const dateStr = now.toLocaleString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric', 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                });
-                transactions.unshift({
-                    amount: amount,
-                    type: type,
-                    status: status,
-                    date: dateStr
-                });
-                render();
-            }
+    function render() {
+        renderMarket();
+        renderInventory();
+        renderProfile();
+        updateHeader();
+        document.getElementById('balanceDisplay').textContent = state.balance;
+        saveState();
+    }
 
-            // Add funds (developer)
-            function addFunds(amount) {
-                if (isNaN(amount) || amount <= 0) {
-                    alert('Please enter a valid positive amount.');
-                    return false;
-                }
-                balance += amount;
-                addTransaction(amount, 'received', 'Confirmed');
-                render();
-                return true;
-            }
+    function updateHeader() {
+        const avatarDiv = document.getElementById('avatarDisplay');
+        if (state.avatar) {
+            avatarDiv.innerHTML = `<img src="${state.avatar}" alt="avatar">`;
+        } else {
+            avatarDiv.textContent = state.username.charAt(0).toUpperCase();
+        }
+        document.getElementById('usernameDisplay').innerHTML = state.username + (state.verified ? ' <span class="verified-badge">✓</span>' : '');
+        document.getElementById('verifiedBadge').style.display = state.verified ? 'inline' : 'none';
+    }
 
-            // Dev menu
-            function openDevMenu() {
-                devOverlay.classList.add('open');
-                devAmount.value = '';
-                devAmount.focus();
-            }
+    function renderMarket() {
+        const grid = document.getElementById('marketGrid');
+        if (!state.items.length) {
+            grid.innerHTML = '<div class="empty-state">Товаров нет. Добавь!</div>';
+            return;
+        }
+        let html = '';
+        state.items.forEach(item => {
+            const isOwner = (item.seller === state.username);
+            html += `<div class="market-item" data-id="${item.id}">
+                <img src="${item.url}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%231a1a2e%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%235a5a7a%22 font-size=%2214%22%3Eошибка%3C/text%3E%3C/svg%3E'">
+                <div class="title">${item.title||'Без названия'}</div>
+                <div class="price"><span class="coin-icon"></span> ${item.price}</div>
+                <div class="seller">👤 ${item.seller || 'Аноним'}</div>
+                <button class="buy-btn" data-id="${item.id}">Купить</button>
+                ${isOwner ? `<button class="delete-btn" data-id="${item.id}">✕</button>` : ''}
+            </div>`;
+        });
+        grid.innerHTML = html;
+    }
 
-            function closeDevMenu() {
-                devOverlay.classList.remove('open');
-            }
+    function renderInventory() {
+        const grid = document.getElementById('inventoryGrid');
+        if (!state.inventory.length) {
+            grid.innerHTML = '<div class="empty-state">Инвентарь пуст</div>';
+            return;
+        }
+        let html = '';
+        state.inventory.forEach(item => {
+            const rareClass = item.rare ? 'red-rare' : '';
+            html += `<div class="inv-item ${rareClass}" data-id="${item.id}">
+                <img src="${item.url}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%231a1a2e%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%235a5a7a%22 font-size=%2214%22%3Eошибка%3C/text%3E%3C/svg%3E'">
+                <div class="title">${item.title||'Без названия'} ${item.rare?'🔥':''}</div>
+                <button class="action-btn roulette" data-id="${item.id}">🎰 Ухудшить</button>
+                <button class="action-btn sell" data-id="${item.id}">💰 Продать</button>
+                <button class="delete-btn" data-id="${item.id}">✕</button>
+            </div>`;
+        });
+        grid.innerHTML = html;
+    }
 
-            // Settings click handler (count to 10)
-            settingsBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                clickCount++;
-                if (clickCount >= 10) {
-                    clickCount = 0;
-                    openDevMenu();
-                }
+    function renderProfile() {
+        document.getElementById('profileUsername').value = state.username;
+        document.getElementById('profileVerified').checked = state.verified;
+        const preview = document.getElementById('profileAvatarPreview');
+        if (state.avatar) {
+            preview.innerHTML = `<img src="${state.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+        } else {
+            preview.textContent = state.username.charAt(0).toUpperCase();
+        }
+    }
+
+    // --- логика ---
+    function buyItem(id) {
+        const item = state.items.find(it => it.id === id);
+        if (!item) return;
+        if (state.balance < item.price) { /* без alert */ return; }
+        if (!confirm(`Купить "${item.title}" за ${item.price} монет?`)) return;
+        state.balance -= item.price;
+        state.inventory.push({ id: state.nextId++, url: item.url, title: item.title, rare: false });
+        render();
+    }
+
+    function deleteFromInventory(id) {
+        if (!confirm('Удалить из инвентаря?')) return;
+        state.inventory = state.inventory.filter(it => it.id !== id);
+        render();
+    }
+
+    function deleteFromMarket(id) {
+        const item = state.items.find(it => it.id === id);
+        if (!item) return;
+        if (item.seller !== state.username) return;
+        if (!confirm('Удалить товар?')) return;
+        state.items = state.items.filter(it => it.id !== id);
+        render();
+    }
+
+    // Продажа из инвентаря
+    function sellFromInventory(id, price) {
+        const idx = state.inventory.findIndex(it => it.id === id);
+        if (idx === -1) return false;
+        const item = state.inventory[idx];
+        if (!price || price < 1) return false;
+        // переносим в маркет
+        state.items.push({
+            id: state.nextId++,
+            url: item.url,
+            title: item.title,
+            price: parseInt(price),
+            seller: state.username
+        });
+        // удаляем из инвентаря
+        state.inventory.splice(idx, 1);
+        render();
+        return true;
+    }
+
+    function addItem(file, title, price) {
+        if (!file || !price || price < 1) return false;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const url = e.target.result;
+            state.items.push({
+                id: state.nextId++,
+                url,
+                title: title.trim() || 'Без названия',
+                price: parseInt(price),
+                seller: state.username
             });
-
-            // Dev add button
-            devAddBtn.addEventListener('click', function() {
-                const raw = devAmount.value.trim();
-                const amount = parseFloat(raw);
-                if (addFunds(amount)) {
-                    closeDevMenu();
-                }
-            });
-
-            // Dev close button
-            devCloseBtn.addEventListener('click', closeDevMenu);
-
-            // Close on overlay click (background)
-            devOverlay.addEventListener('click', function(e) {
-                if (e.target === devOverlay) {
-                    closeDevMenu();
-                }
-            });
-
-            // Enter key on input
-            devAmount.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    devAddBtn.click();
-                }
-            });
-
-            // Initial render
             render();
+        };
+        reader.readAsDataURL(file);
+        return true;
+    }
 
-            // Also handle "See all" and other buttons as demo
-            // Already have inline onclick
+    // рулетка
+    function roulette() {
+        if (state.balance < 1500) { /* без alert */ return; }
+        if (!confirm('Запустить рулетку за 1500 монет?')) return;
+        if (state.inventory.length === 0) { /* без alert */ return; }
+        const idx = Math.floor(Math.random() * state.inventory.length);
+        const item = state.inventory[idx];
+        state.balance -= 1500;
+        const win = Math.random() < 0.5;
+        if (win) {
+            item.rare = true;
+            document.getElementById('rouletteResult').textContent = `🔥 Победа! "${item.title}" стал красной редкостью!`;
+        } else {
+            state.inventory.splice(idx, 1);
+            document.getElementById('rouletteResult').textContent = `💀 Проигрыш! Картинка "${item.title}" потеряна.`;
+        }
+        render();
+    }
 
-            // Prevent context menu on long press (mobile)
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
+    // --- делегирование ---
+    document.getElementById('marketGrid').addEventListener('click', function(e) {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const id = parseInt(btn.dataset.id);
+        if (btn.classList.contains('buy-btn')) buyItem(id);
+        else if (btn.classList.contains('delete-btn')) deleteFromMarket(id);
+    });
 
-            // For demonstration, we could also prefill some data? No, start empty.
-            // Optionally, we could add a welcome transaction? No, keep empty.
+    document.getElementById('inventoryGrid').addEventListener('click', function(e) {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const id = parseInt(btn.dataset.id);
+        if (btn.classList.contains('delete-btn')) deleteFromInventory(id);
+        else if (btn.classList.contains('roulette')) roulette();
+        else if (btn.classList.contains('sell')) {
+            // открыть модалку продажи
+            sellingItemId = id;
+            document.getElementById('sellModalOverlay').classList.add('open');
+            document.getElementById('sellPriceInput').value = '';
+            document.getElementById('sellPriceInput').focus();
+        }
+    });
 
-            console.log('NovaPay ready. Click Settings 10x for dev menu.');
-        })();
-    </script>
+    document.getElementById('rouletteBtn').addEventListener('click', roulette);
+
+    // --- модалка добавления ---
+    const overlay = document.getElementById('modalOverlay');
+    const addBtn = document.getElementById('addItemBtn');
+    const cancelBtn = document.getElementById('modalCancel');
+    const confirmBtn = document.getElementById('modalConfirm');
+    const fileInput = document.getElementById('imageFileInput');
+    const titleInput = document.getElementById('imageTitleInput');
+    const priceInput = document.getElementById('imagePriceInput');
+
+    addBtn.addEventListener('click', ()=> overlay.classList.add('open'));
+    cancelBtn.addEventListener('click', ()=> overlay.classList.remove('open'));
+    overlay.addEventListener('click', (e)=> { if(e.target===overlay) overlay.classList.remove('open'); });
+    confirmBtn.addEventListener('click', function() {
+        const file = fileInput.files[0];
+        const title = titleInput.value.trim();
+        const price = priceInput.value.trim();
+        if (!file) return;
+        if (!price || price<1) return;
+        addItem(file, title, price);
+        overlay.classList.remove('open');
+        fileInput.value = '';
+        titleInput.value = '';
+        priceInput.value = '';
+    });
+
+    // --- модалка продажи ---
+    const sellOverlay = document.getElementById('sellModalOverlay');
+    const sellCancel = document.getElementById('sellModalCancel');
+    const sellConfirm = document.getElementById('sellModalConfirm');
+    const sellPriceInput = document.getElementById('sellPriceInput');
+
+    sellCancel.addEventListener('click', ()=> { sellOverlay.classList.remove('open'); sellingItemId = null; });
+    sellOverlay.addEventListener('click', (e)=> { if(e.target===sellOverlay) { sellOverlay.classList.remove('open'); sellingItemId = null; } });
+    sellConfirm.addEventListener('click', function() {
+        const price = sellPriceInput.value.trim();
+        if (!price || price<1) return;
+        if (sellingItemId !== null) {
+            sellFromInventory(sellingItemId, price);
+            sellOverlay.classList.remove('open');
+            sellingItemId = null;
+        }
+    });
+    sellPriceInput.addEventListener('keydown', (e)=> { if(e.key==='Enter') sellConfirm.click(); });
+
+    // --- профиль ---
+    const profileSaveBtn = document.getElementById('profileSaveBtn');
+    profileSaveBtn.addEventListener('click', function() {
+        const newUsername = document.getElementById('profileUsername').value.trim() || 'Аноним';
+        state.username = newUsername;
+        state.verified = document.getElementById('profileVerified').checked;
+        const fileInputAvatar = document.getElementById('profileAvatarInput');
+        if (fileInputAvatar.files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                state.avatar = e.target.result;
+                render();
+            };
+            reader.readAsDataURL(fileInputAvatar.files[0]);
+        } else {
+            render();
+        }
+        document.getElementById('removeAvatarBtn').addEventListener('click', function() {
+            state.avatar = '';
+            render();
+        });
+        render();
+        alert('Профиль сохранён!');
+    });
+
+    // переключение вкладок
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+            this.classList.add('active');
+            const target = this.dataset.tab;
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+            document.getElementById('page-'+target).classList.add('active');
+        });
+    });
+
+    document.getElementById('profileTrigger').addEventListener('click', function() {
+        document.querySelector('.tab[data-tab="profile"]').click();
+    });
+
+    loadState();
+    render();
+    console.log('✅ Готово');
+})();
+</script>
 </body>
 </html>
